@@ -1,0 +1,45 @@
+name: funny_donald
+services:
+  main_app:
+    cpu_shares: 90
+    command: []
+    deploy:
+      resources:
+        limits:
+          memory: 14600015872
+        reservations:
+          devices: []
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    environment:
+      - OLLAMA_FLASH_ATTENTION=1
+      - OLLAMA_VULKAN=1
+    image: grinco/ollama-amd-apu:latest
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/ollama.png
+    ports:
+      - target: 11434
+        published: "11434"
+        protocol: tcp
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/ollama-amd-apu
+        target: /root/.ollama
+    cap_add: []
+    network_mode: bridge
+    container_name: ""
+x-casaos:
+  author: self
+  category: self
+  hostname: ""
+  icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/ollama.png
+  index: /
+  is_uncontrolled: false
+  port_map: "11434"
+  scheme: http
+  store_app_id: funny_donald
+  title:
+    custom: Ollama-AMD-APU
